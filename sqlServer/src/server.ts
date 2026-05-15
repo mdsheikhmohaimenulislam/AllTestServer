@@ -120,9 +120,12 @@ app.delete("/api/users/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const result = await pool.query(`
+    const result = await pool.query(
+      `
       DELETE FROM users WHERE id=$1
-      `,[id]);
+      `,
+      [id],
+    );
 
     if (result.rowCount === 0) {
       return sendRespond(res, 404, false, "User Not Found!..", {});
