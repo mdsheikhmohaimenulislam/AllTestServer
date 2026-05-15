@@ -6,6 +6,7 @@ import express, {
 const app: Application = express();
 const port = 3000;
 import { Pool } from "pg";
+import sendRespond from "./utility/sendResponse";
 
 app.use(express.json());
 // app.use(express.text())
@@ -35,10 +36,11 @@ const initDB = async () => {
 };
 initDB();
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Express Server.." });
+  // res.status(200).json({ message: "Express Server.." });
+  sendRespond(res, 200, true, "User Created Successfully.");
 });
 
-app.post("/", async (req: Request, res: Response) => {
+app.post("/api/users", async (req: Request, res: Response) => {
   //   console.log(req.body);
   const { name, email, password, age } = req.body;
 
@@ -51,11 +53,42 @@ app.post("/", async (req: Request, res: Response) => {
       [name, email, password, age],
     );
     // console.log(result.rows[0]);
-    res
-      .status(201)
-      .json({ message: "User Created Successfully.", data: result.rows[0] });
+
+    sendRespond(res, 201, true, "User Created Successfully.", result.rows[0]);
   } catch (error: any) {
-    res.status(500).json({ message: error.message, error: error });
+    sendRespond(res, 500, false, error.message, error);
+  }
+});
+
+app.get("/api/users", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`
+      SELECT * FROM users
+      `);
+
+    sendRespond(res, 200, true, "Users retrived Successfully..", result.rows);
+  } catch (error: any) {
+    sendRespond(res, 500, false, error.message, error);
+  }
+});
+
+app.get("/api/users/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      `
+      SELECT * FROM users WHERE id=$1
+      `,
+      [id],
+    );
+    // console.log(result.rows);
+
+    if (result.rows.length === 0) {
+      return sendRespond(res, 404, false, "User Not Found!..", {});
+    }
+    sendRespond(res, 200, true, "User retrived Successfully..", result.rows);
+  } catch (error: any) {
+    sendRespond(res, 500, false, error.message, error);
   }
 });
 
