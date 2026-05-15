@@ -116,6 +116,25 @@ app.put("/api/users/:id", async (req: Request, res: Response) => {
   }
 });
 
+app.delete("/api/users/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query(`
+      DELETE FROM users WHERE id=$1
+      `,[id]);
+
+    if (result.rowCount === 0) {
+      return sendRespond(res, 404, false, "User Not Found!..", {});
+    }
+
+    sendRespond(res, 200, true, "User Deleted Successfully..", {});
+    // console.log(result);
+  } catch (error: any) {
+    sendRespond(res, 500, false, error.message, error);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
