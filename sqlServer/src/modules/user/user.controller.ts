@@ -16,7 +16,7 @@ const getAllUsers = async (req: Request, res: Response) => {
   try {
     const result = await userService.getAllUsersIntoDB();
 
-    sendRespond(res, 200, true, "Users retrived Successfully..", result.rows);
+    sendRespond(res, 200, true, "Users retrived Successfully..", result);
   } catch (error: any) {
     sendRespond(res, 500, false, error.message, error);
   }
