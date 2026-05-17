@@ -8,6 +8,7 @@ const app: Application = express();
 import sendRespond from "./utility/sendResponse";
 import { pool } from "./db";
 import { userRoute } from "./modules/user/user.route";
+import { profileRoute } from "./modules/profile/profile.routes";
 
 
 
@@ -23,6 +24,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // connect in router....
 app.use("/api/users",userRoute)
+app.use("/api/profile", profileRoute)
 
 
 
