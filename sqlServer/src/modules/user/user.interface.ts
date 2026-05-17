@@ -5,3 +5,7 @@ export interface IUser {
   age: number;
   is_active?: boolean;
 }
+
+// export interface IUserProfile {
+//   user_id, bio, address, phone, gender,role
+// }
