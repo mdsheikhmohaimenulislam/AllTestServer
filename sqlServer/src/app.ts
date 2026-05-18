@@ -22,7 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // connect in router....
 app.use("/api/users", userRoute);
-app.use("/api/profile", profileRoute); 
-app.use("/api/auth", authRoute); 
+app.use("/api/profile", profileRoute);
+app.use("/api/auth", authRoute);
 
 export default app;
