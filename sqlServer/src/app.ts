@@ -6,7 +6,6 @@ import express, {
 const app: Application = express();
 
 import sendRespond from "./utility/sendResponse";
-import { pool } from "./db";
 import { userRoute } from "./modules/user/user.route";
 import { profileRoute } from "./modules/profile/profile.routes";
 import { authRoute } from "./modules/auth/auth.routes";
