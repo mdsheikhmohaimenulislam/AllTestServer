@@ -1,0 +1,80 @@
+ Method -> GET Time -> 1779180311752 URL -> $
+{req.url}' Method -> GET Time -> 1779180370376 URL -> /'
+Method : GET
+URL    : /
+Time   : 5/19/2026, 2:47:50 PM
+-------------------------
+
+Method : GET
+URL    : /
+Time   : 5/19/2026, 2:48:41 PM
+-------------------------
+
+Method : GET
+URL    : /product
+Time   : 5/19/2026, 2:48:45 PM
+-------------------------
+
+Method : GET
+URL    : /product
+Time   : 5/19/2026, 2:48:46 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 2:49:04 PM
+-------------------------
+
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 2:50:53 PM
+-------------------------
+
+
+
+Method : GET
+URL    : /
+Time   : 5/19/2026, 2:50:59 PM
+-------------------------
+
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 3:15:10 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 3:15:57 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 3:19:03 PM
+-------------------------
+
+Method : POST
+URL    : /api/auth/login
+Time   : 5/19/2026, 3:20:42 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 3:22:41 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 3:23:34 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 3:27:14 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/19/2026, 3:27:46 PM
+-------------------------
