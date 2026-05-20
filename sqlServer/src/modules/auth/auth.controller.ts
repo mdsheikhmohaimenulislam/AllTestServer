@@ -14,9 +14,18 @@ const loginUser = async (req: Request, res: Response) => {
       sameSite: "lax",
     });
 
-    return sendRespond(res, 201, true, "User login Successfully!..", result);
+    return sendRespond(res, {
+      status: 201,
+      success: true,
+      message: "User login Successfully!..",
+      data: result,
+    });
   } catch (error: any) {
-    sendRespond(res, 500, false, error.message, error);
+    sendRespond(res, {
+      status: 500,
+      success: false,
+      message: "User Not Found!..",
+    });
   }
 };
 
@@ -26,9 +35,18 @@ const refreshToken = async (req: Request, res: Response) => {
       req.cookies.refreshToken,
     );
 
-    return sendRespond(res, 201, true, "Access token generated!..", result);
+    return sendRespond(res, {
+      status: 201,
+      success: true,
+      message: "Access token generated!..",
+      data: result,
+    });
   } catch (error: any) {
-    sendRespond(res, 500, false, error.message, error);
+    sendRespond(res, {
+      status: 500,
+      success: false,
+      message: "User Not Found!..",
+    });
   }
 };
 

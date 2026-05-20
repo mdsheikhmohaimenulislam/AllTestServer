@@ -20,7 +20,7 @@ const auth = (...role:Role[]) => {
       const token = req.headers.authorization;
 
       if (!token) {
-        return sendRespond(res, 401, false, "Unauthorized access!..");
+        return sendRespond(res, {status:401, success:false, message:"Unauthorized access!.."});
       }
 
       const decoded = jwt.verify(
@@ -39,24 +39,24 @@ const auth = (...role:Role[]) => {
       // console.log(user);
 
       if (userData.rows.length === 0) {
-        return sendRespond(res, 404, false, "user not found!..");
+        return sendRespond(res, {status:404, success:false, message:"user not found!.."});
       }
 
       if (!user.is_active) {
-        return sendRespond(res, 403, false, "Forbidden!..");
+        return sendRespond(res,{ status:403, success:false, message:"Forbidden!.."});
       }
 
 
 
       if(role.length && !role.includes(user.role)){
-         return sendRespond(res, 403, false, "Forbidden!..");
+         return sendRespond(res,{ status:403, success:false, message:"Forbidden!.."});
       }
 
       req.user = decoded;
 
       next();
     } catch (error) {
-      return sendRespond(res, 401, false, "Invalid token");
+      return sendRespond(res, {status:401, success:false, message:"Invalid token"});
     }
   };
 };

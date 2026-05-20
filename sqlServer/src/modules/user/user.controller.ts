@@ -6,10 +6,13 @@ const createUser = async (req: Request, res: Response) => {
   //   console.log(req.body);
   try {
     const result = await userService.createUserIntoDB(req.body);
-    sendRespond(res, 201, true, "User Created Successfully.", result.rows[0]);
-  } catch (error: any) {
-    sendRespond(res, 500, false, error.message, error);
-  }
+    sendRespond(res, {
+      status: 200,
+      success: true,
+      message: "User created",
+      data: result,
+    });
+  } catch (error: any) {}
 };
 
 const getAllUsers = async (req: Request, res: Response) => {
@@ -17,9 +20,19 @@ const getAllUsers = async (req: Request, res: Response) => {
   try {
     const result = await userService.getAllUsersIntoDB();
 
-    sendRespond(res, 200, true, "Users retrived Successfully..", result);
+    sendRespond(res, {
+      status: 500,
+      success: false,
+      message: "Users retrived Successfully..",
+      data: result,
+    });
   } catch (error: any) {
-    sendRespond(res, 500, false, error.message, error);
+    sendRespond(res, {
+      status: 500,
+      success: false,
+      message: error.message,
+      error: error,
+    });
   }
 };
 
@@ -30,11 +43,25 @@ const getSingleUser = async (req: Request, res: Response) => {
     // console.log(result.rows);
 
     if (result.rows.length === 0) {
-      return sendRespond(res, 404, false, "User Not Found!..", {});
+      sendRespond(res, {
+        status: 404,
+        success: false,
+        message: "User Not Found!..",
+      });
     }
-    sendRespond(res, 200, true, "User retrived Successfully..", result.rows);
+    sendRespond(res, {
+      status: 200,
+      success: true,
+      message: "User retrived Successfully..",
+      data: result.rows,
+    });
   } catch (error: any) {
-    sendRespond(res, 500, false, error.message, error);
+    sendRespond(res, {
+      status: 500,
+      success: false,
+      message: error.message,
+      error: error,
+    });
   }
 };
 
@@ -47,12 +74,25 @@ const updatedUser = async (req: Request, res: Response) => {
     const result = await userService.updatedUserIntoDB(req.body, id as string);
 
     if (result.rows.length === 0) {
-      return sendRespond(res, 404, false, "User Not Found!..", {});
+      return sendRespond(res, {
+        status: 404,
+        success: false,
+        message: "User Not Found!..",
+      });
     }
 
-    sendRespond(res, 200, true, "User updated Successfully..", result.rows[0]);
+    sendRespond(res, {
+      status: 200,
+      success: true,
+      message: "User updated Successfully..",
+      data: result.rows[0],
+    });
   } catch (error: any) {
-    sendRespond(res, 500, false, error.message, error);
+    sendRespond(res, {
+      status: 404,
+      success: false,
+      message: "User Not Found!..",
+    });
   }
 };
 
@@ -63,13 +103,25 @@ const userDeleted = async (req: Request, res: Response) => {
     const result = await userService.userDeletedIntoDB(id as string);
 
     if (result.rowCount === 0) {
-      return sendRespond(res, 404, false, "User Not Found!..", {});
+      return sendRespond(res, {
+        status: 404,
+        success: false,
+        message: "User Not Found!..",
+      });
     }
 
-    sendRespond(res, 200, true, "User Deleted Successfully..", {});
+    sendRespond(res, {
+      status: 200,
+      success: true,
+      message: "User Deleted Successfully..",
+    });
     // console.log(result);
   } catch (error: any) {
-    sendRespond(res, 500, false, error.message, error);
+    sendRespond(res, {
+      status: 500,
+      success: false,
+      message: "User Not Found!..",
+    });
   }
 };
 
