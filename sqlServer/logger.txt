@@ -583,3 +583,13 @@ Method : POST
 URL    : /api/auth/refresh-token
 Time   : 5/20/2026, 9:36:00 PM
 -------------------------
+
+Method : POST
+URL    : /api/auth/refresh-token
+Time   : 5/20/2026, 9:54:02 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 9:54:13 PM
+-------------------------
