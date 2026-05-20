@@ -3,20 +3,23 @@ import type { IUser } from "./user.interface";
 import bcrypt from "bcryptjs";
 
 const createUserIntoDB = async (payload: IUser) => {
-  const { name, email, password, age } = payload;
+  const { name, email, password, age, role } = payload;
+  // console.log(role);
 
-  const hashPassword =await bcrypt.hash(password,10) 
+  const roleValue = role ?? "user";
+
+  const hashPassword = await bcrypt.hash(password, 10);
 
   const result = await pool.query(
     `
-    INSERT INTO users(name,email,password,age) VALUES($1,$2,$3,$4)
+    INSERT INTO users(name,email,password,age,role) VALUES($1,$2,$3,$4,$5)
     RETURNING *
     `,
-    [name, email, hashPassword, age],
+    [name, email, hashPassword, age, roleValue],
   );
 
   // single any return value delete don't show ui
-  delete result.rows[0].password
+  delete result.rows[0].password;
   // console.log(result.rows[0]);
   return result;
 };
@@ -25,10 +28,10 @@ const getAllUsersIntoDB = async () => {
   const result = await pool.query(`
       SELECT * FROM users
       `);
-// console.log(result.rows);
+  // console.log(result.rows);
 
-const removePassword = result.rows.map(({password, ...rest})=> rest)
-// console.log(removePassword);
+  const removePassword = result.rows.map(({ password, ...rest }) => rest);
+  // console.log(removePassword);
 
   return removePassword;
 };
@@ -43,7 +46,7 @@ const getSingleUserIntoDB = async (id: string) => {
   // console.log(result);
 
   // console.log(result.rows[0]);
-  delete result.rows[0].password
+  delete result.rows[0].password;
   return result;
 };
 

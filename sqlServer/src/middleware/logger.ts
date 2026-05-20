@@ -4,9 +4,9 @@ import fs from "fs";
 const logger = (req: Request, res: Response, next: NextFunction) => {
   // Middleware code goes here
 
-  console.log(req.method);
-  console.log(req.url);
-  console.log("Time:", Date.now());
+  // console.log(req.method);
+  // console.log(req.url);
+  // console.log("Time:", Date.now());
   const log = `
 Method : ${req.method}
 URL    : ${req.url}
