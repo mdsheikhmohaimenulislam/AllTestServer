@@ -14,7 +14,7 @@ Time   : ${new Date().toLocaleString()}
 -------------------------
 `;
   fs.appendFile("logger.txt", log, (err) => {
-    console.log(err);
+    // console.log(err);
   });
   // Call next() to pass control to the next middleware function
   next();
