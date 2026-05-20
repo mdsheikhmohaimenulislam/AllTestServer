@@ -3,9 +3,11 @@ import sendRespond from "../utility/sendResponse";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { pool } from "../db";
+import type { Role } from "../modules/user/user.interface";
 
-const auth = () => {
+const auth = (...role:Role[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
+    // console.log(req);
     try {
       // console.log("this is protected route");
       // console.log(req.headers.authorization);
@@ -44,11 +46,17 @@ const auth = () => {
         return sendRespond(res, 403, false, "Forbidden!..");
       }
 
+
+
+      if(role.length && !role.includes(user.role)){
+         return sendRespond(res, 403, false, "Forbidden!..");
+      }
+
       req.user = decoded;
 
       next();
     } catch (error) {
-      next(error);
+      return sendRespond(res, 401, false, "Invalid token");
     }
   };
 };

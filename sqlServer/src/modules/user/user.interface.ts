@@ -1,7 +1,14 @@
-export const role = ["user", "admin", "agent"] as const;
+// export const role = ["user", "admin", "agent"] as const;
 
-type Role = typeof role[number]
+// export type Role = typeof role[number]
 
+export const role = {
+  admin: "admin",
+  agent: "agent",
+  user: "user",
+} as const;
+
+export type Role = (typeof role)[keyof typeof role];
 
 export interface IUser {
   name: string;
@@ -9,7 +16,7 @@ export interface IUser {
   password: string;
   age: number;
   is_active?: boolean;
-  role?:Role
+  role?: Role;
 }
 
 // export interface IUserProfile {

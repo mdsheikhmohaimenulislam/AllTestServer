@@ -463,3 +463,88 @@ Method : POST
 URL    : /api/users
 Time   : 5/20/2026, 9:09:43 AM
 -------------------------
+
+Method : POST
+URL    : /api/auth/login
+Time   : 5/20/2026, 3:27:24 PM
+-------------------------
+
+Method : POST
+URL    : /api/auth/login
+Time   : 5/20/2026, 3:27:46 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:28:20 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:28:52 PM
+-------------------------
+
+Method : POST
+URL    : /api/auth/login
+Time   : 5/20/2026, 3:29:02 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:29:22 PM
+-------------------------
+
+Method : POST
+URL    : /api/auth/login
+Time   : 5/20/2026, 3:29:34 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:30:01 PM
+-------------------------
+
+Method : POST
+URL    : /api/auth/login
+Time   : 5/20/2026, 3:30:53 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:31:10 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:31:21 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:31:57 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:35:44 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:40:11 PM
+-------------------------
+
+Method : GET
+URL    : /api/users
+Time   : 5/20/2026, 3:40:12 PM
+-------------------------
+
+Method : POST
+URL    : /api/users
+Time   : 5/20/2026, 7:18:49 PM
+-------------------------
+
+Method : POST
+URL    : /api/users
+Time   : 5/20/2026, 7:19:09 PM
+-------------------------
