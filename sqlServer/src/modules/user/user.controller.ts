@@ -10,9 +10,9 @@ const createUser = async (req: Request, res: Response) => {
       status: 200,
       success: true,
       message: "User created",
-      data: result,
+      data: result.rows[0],
     });
-  } catch (error: any) {}
+  } catch (error: unknown) {}
 };
 
 const getAllUsers = async (req: Request, res: Response) => {
@@ -21,9 +21,9 @@ const getAllUsers = async (req: Request, res: Response) => {
     const result = await userService.getAllUsersIntoDB();
 
     sendRespond(res, {
-      status: 500,
-      success: false,
-      message: "Users retrived Successfully..",
+      status: 200,
+      success: true,
+      message: "Successfully All User Data..",
       data: result,
     });
   } catch (error: any) {
@@ -43,20 +43,20 @@ const getSingleUser = async (req: Request, res: Response) => {
     // console.log(result.rows);
 
     if (result.rows.length === 0) {
-      sendRespond(res, {
+      return sendRespond(res, {
         status: 404,
         success: false,
         message: "User Not Found!..",
       });
     }
-    sendRespond(res, {
+    return sendRespond(res, {
       status: 200,
       success: true,
       message: "User retrived Successfully..",
       data: result.rows,
     });
   } catch (error: any) {
-    sendRespond(res, {
+    return sendRespond(res, {
       status: 500,
       success: false,
       message: error.message,
@@ -72,7 +72,7 @@ const updatedUser = async (req: Request, res: Response) => {
 
   try {
     const result = await userService.updatedUserIntoDB(req.body, id as string);
-
+// console.log(req.body);
     if (result.rows.length === 0) {
       return sendRespond(res, {
         status: 404,
