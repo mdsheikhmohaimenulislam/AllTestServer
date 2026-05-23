@@ -72,7 +72,7 @@ const updatedUser = async (req: Request, res: Response) => {
 
   try {
     const result = await userService.updatedUserIntoDB(req.body, id as string);
-// console.log(req.body);
+    // console.log(req.body);
     if (result.rows.length === 0) {
       return sendRespond(res, {
         status: 404,

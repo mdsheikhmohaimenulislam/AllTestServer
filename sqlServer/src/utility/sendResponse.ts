@@ -16,8 +16,6 @@
 
 // export default sendRespond;
 
-
-
 import type { Response } from "express";
 
 type TRespond<T> = {
@@ -38,6 +36,3 @@ const sendRespond = <T>(res: Response, data: TRespond<T>) => {
 };
 
 export default sendRespond;
-
-
-
