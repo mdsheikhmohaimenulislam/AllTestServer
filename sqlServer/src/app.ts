@@ -15,8 +15,8 @@ import cors from "cors";
 import globalErrorHandling from "./middleware/globalErrorHandling";
 
 // MiddleWare
-app.use(CookieParser());
-app.use(express.json());
+// app.use(CookieParser());
+// app.use(express.json());
 // app.use(express.text())
 // app.use(express.urlencoded({ extended: true }));
 app.use(logger);
