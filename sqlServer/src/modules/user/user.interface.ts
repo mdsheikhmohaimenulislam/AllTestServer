@@ -8,7 +8,7 @@ export const role = {
   user: "user",
 } as const;
 
-// export type Role = (typeof role)[keyof typeof role];
+export type Role = (typeof role)[keyof typeof role];
 
 export interface IUser {
   name: string;
