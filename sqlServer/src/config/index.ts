@@ -11,7 +11,7 @@ const config = {
   JWT_SECRET: process.env.JWT_SECRET,
   refresh_secret: process.env.JWT_REFRESH_SECRET,
   expiresInAccessToken: process.env.EXPIRES_IN_ACCESS_TOKEN,
-  // refreshInToken: process.env.EXPIRES_IN_REFRESH_TOKEN,
+  refreshInToken: process.env.EXPIRES_IN_REFRESH_TOKEN,
 };
 
 export default config;
