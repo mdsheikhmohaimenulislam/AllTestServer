@@ -52,5 +52,5 @@ const refreshToken = async (req: Request, res: Response) => {
 
 export const authController = {
   loginUser,
-  refreshToken,
+  // refreshToken,
 };
