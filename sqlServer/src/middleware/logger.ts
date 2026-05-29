@@ -20,4 +20,4 @@ Time   : ${new Date().toLocaleString()}
   next();
 };
 
-// export default logger;
+export default logger;
