@@ -14,4 +14,4 @@ const config = {
   refreshInToken: process.env.EXPIRES_IN_REFRESH_TOKEN,
 };
 
-// export default config;
+export default config;
