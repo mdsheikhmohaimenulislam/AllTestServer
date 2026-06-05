@@ -36,19 +36,19 @@ const getAllUsersIntoDB = async () => {
   return removePassword;
 };
 
-// const getSingleUserIntoDB = async (id: string) => {
-//   const result = await pool.query(
-//     `
-//       SELECT * FROM users WHERE id=$1
-//       `,
-//     [id],
-//   );
-//   // console.log(result);
+const getSingleUserIntoDB = async (id: string) => {
+  const result = await pool.query(
+    `
+      SELECT * FROM users WHERE id=$1
+      `,
+    [id],
+  );
+  // console.log(result);
 
-//   // console.log(result.rows[0]);
-//   delete result.rows[0].password;
-//   return result;
-// };
+  // console.log(result.rows[0]);
+  delete result.rows[0].password;
+  return result;
+};
 
 const updatedUserIntoDB = async (payload: IUser, id: string) => {
   const { name, password, age, is_active } = payload;
