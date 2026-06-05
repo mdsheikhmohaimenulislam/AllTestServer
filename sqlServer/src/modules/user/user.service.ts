@@ -24,17 +24,17 @@ const createUserIntoDB = async (payload: IUser) => {
   return result;
 };
 
-// const getAllUsersIntoDB = async () => {
-//   const result = await pool.query(`
-//       SELECT * FROM users
-//       `);
-//   // console.log(result.rows);
+const getAllUsersIntoDB = async () => {
+  const result = await pool.query(`
+      SELECT * FROM users
+      `);
+  // console.log(result.rows);
 
-//   const removePassword = result.rows.map(({ password, ...rest }) => rest);
-//   // console.log(removePassword);
+  const removePassword = result.rows.map(({ password, ...rest }) => rest);
+  // console.log(removePassword);
 
-//   return removePassword;
-// };
+  return removePassword;
+};
 
 const getSingleUserIntoDB = async (id: string) => {
   const result = await pool.query(
