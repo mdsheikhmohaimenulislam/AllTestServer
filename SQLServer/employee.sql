@@ -115,5 +115,5 @@ drop column dob;
 alter table employee 
 add column dob varchar(20)
 
--- -- deleted table employee
--- drop table employee
+-- deleted table employee
+drop table employee
