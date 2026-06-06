@@ -21,7 +21,7 @@ app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 
-// app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000" }));
 
 app.get("/", (req: Request, res: Response) => {
   // res.status(200).json({ message: "Express Server.." });
