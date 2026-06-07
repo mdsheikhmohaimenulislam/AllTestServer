@@ -266,9 +266,10 @@ where country in ('USA','UK')
 -- 10.....
 select 
   sum(total_amount) as "total revenue",
-  avg(total_amount) as "Average Amount",
+  round(avg(total_amount),2) as "Average Amount",
   max(total_amount) as "Maximum Amount",
-  min(total_amount) as "Minimum Amount"
+  min(total_amount) as "Minimum Amount",
+  count(*) as "total_orders_in_june"
 from orders
 where order_date between '2023-06-01' and '2023-06-30'
 
