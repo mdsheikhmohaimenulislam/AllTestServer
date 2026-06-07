@@ -169,4 +169,4 @@ select min(age) from students;
 
 select sum(age) from students;
 
-select count(first_name) from students;
+select count(*) from students;
