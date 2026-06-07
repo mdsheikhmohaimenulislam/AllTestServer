@@ -124,3 +124,23 @@ where country = 'Bangladesh' or country = 'Japan' or country = 'UAE';
 -- Short vertion
 select  * from students
 where country in ('Bangladesh','Japan','UAE');
+
+
+--Select students whose first name starts with 'A'.
+select * from students
+where first_name like 'M%'
+  
+select * from students
+where first_name like 'M_____%'
+
+-- Select students whose last name ends with 'n'.
+select * from students
+where last_name like '%m';
+
+select * from students
+where last_name like '%a_'
+
+
+-- ILike Case sentive
+select * from students
+where last_name Ilike '%A_'
