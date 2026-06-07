@@ -91,3 +91,8 @@ where (grade = 'A' or grade = 'B') and (course = 'Physics' or course = 'Chemistr
 -- Select students with a grade of 'A' or 'B' in Chemistry or Physics Short verstion
 select * from students
 where grade in ('A','B') and course in ('Physics','Chemistry')
+
+
+-- Select students from the India or from Canada and the age is 19
+select * from students
+where country in ('India', 'Canada') and age = 19
