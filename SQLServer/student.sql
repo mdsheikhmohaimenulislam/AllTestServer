@@ -49,3 +49,6 @@ VALUES
 
 -- Using Select all data
 select * from students;
+
+-- Column name rename Alias
+select first_name as "Frist Name", age as "Student Age" from students;
