@@ -64,3 +64,9 @@ order by age asc
 -- Distinct unique values
 select distinct country from students;
 select distinct course from students;
+
+-- Filtering
+-- ( = ) Operator
+-- Select students from the Japan
+select * from students
+where country = 'Japan';
