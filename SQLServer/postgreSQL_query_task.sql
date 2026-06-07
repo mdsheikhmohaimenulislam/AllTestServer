@@ -243,10 +243,11 @@ select * from books
 where genre = 'Fantasy';
 
 -- 6.....
-select count(*) from orders;
+select count(*) as "Total Order" from orders;
+
 
 -- 7....
-select genre, avg(price) from books
+select genre, round(avg(price),2) from books
 group by genre 
 having avg(price) > 14;
 
@@ -257,7 +258,7 @@ where email Ilike '%.com' and country in ('USA','UK');
 -- 9...
 select  
   upper(concat(customer_first_name, ' ',last_name)) as "Full Name",
-  lower(email) as "Email",
+  email as "Email",
   lower(city) as "City", country
 from customers
 where country in ('USA','UK')
