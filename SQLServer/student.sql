@@ -96,3 +96,31 @@ where grade in ('A','B') and course in ('Physics','Chemistry')
 -- Select students from the India or from Canada and the age is 19
 select * from students
 where country in ('India', 'Canada') and age = 19
+
+-- Comparison operators
+-- select students older than 20
+select * from students
+where age >= 20;
+
+select * from students
+where country != 'India';
+
+select * from students
+where country <> 'India';
+
+select * from students
+where country not in ('India' ,'UAE');
+
+-- Select students whose age is between 20 and 22.
+select * from students
+where age between 20 and 21;
+
+select distinct age from students
+
+-- Select students from Bangladesh, Japan, or UAE.
+select * from students
+where country = 'Bangladesh' or country = 'Japan' or country = 'UAE';
+
+-- Short vertion
+select  * from students
+where country in ('Bangladesh','Japan','UAE');
