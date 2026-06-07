@@ -45,3 +45,7 @@ VALUES
     ('Zahra', 'Mansoor', 20, 'A', 'Finance', 'zahra.sansoor@email.com', '2006-08-31', 'AB+', 'Saudi Arabia'),
     ('Ethan', 'Davis', 22, 'A+', 'Cyber Security', 'ethan.davis@email.com', '2004-07-07', 'B-', 'USA'),
     ('Amara', 'Okonkwo', 21, 'B+', 'Political Science', 'amara.okonkwo@email.com', '2005-03-14', 'O+', 'Nigeria');
+
+
+-- Using Select all data
+select * from students;
