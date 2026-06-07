@@ -144,3 +144,29 @@ where last_name like '%a_'
 -- ILike Case sentive
 select * from students
 where last_name Ilike '%A_'
+
+-- NOT
+-- Select students who are not from India
+-- Select students whose grade is not 'A'.
+select * from students
+where not country = 'India'
+
+
+-- Scaler functions
+-- upper, lower, concat, length
+select upper(first_name) from students;
+select lower(first_name) from students;
+
+select concat(first_name , last_name) as "Full Name" from students;
+
+select length(first_name) from students;
+
+-- Aggregate functions
+-- avg, max, min, sum, count
+select avg(age) as "Avg_age" from students;
+select max(age) from students;
+select min(age) from students;
+
+select sum(age) from students;
+
+select count(first_name) from students;
