@@ -52,3 +52,11 @@ select * from students;
 
 -- Column name rename Alias
 select first_name as "Frist Name", age as "Student Age" from students;
+
+-- Sorting big to small
+select first_name,blood_group,country,age from students
+order by age desc;
+
+-- Sorting small to big
+select first_name, blood_group, country, age from students
+order by age asc
