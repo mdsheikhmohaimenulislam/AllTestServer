@@ -60,3 +60,7 @@ order by age desc;
 -- Sorting small to big
 select first_name, blood_group, country, age from students
 order by age asc
+
+-- Distinct unique values
+select distinct country from students;
+select distinct course from students;
