@@ -70,3 +70,11 @@ select distinct course from students;
 -- Select students from the Japan
 select * from students
 where country = 'Japan';
+
+-- select student with 'A' grade in Computer Science
+select * from students
+where grade = 'A' and course = 'Computer Science'
+
+-- Select students with a specific blood group 'A+'
+select * from students
+where blood_group = 'A+'
