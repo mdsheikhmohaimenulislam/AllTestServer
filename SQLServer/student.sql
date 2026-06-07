@@ -78,3 +78,16 @@ where grade = 'A' and course = 'Computer Science'
 -- Select students with a specific blood group 'A+'
 select * from students
 where blood_group = 'A+'
+
+-- OR Operator
+-- Select students from the USA or from Japan
+select * from students
+where country = 'USA' or  country = 'Japan';
+
+-- Select students with a grade of 'A' or 'B' in Chemistry or Physics
+select * from students
+where (grade = 'A' or grade = 'B') and (course = 'Physics' or course = 'Chemistry');
+
+-- Select students with a grade of 'A' or 'B' in Chemistry or Physics Short verstion
+select * from students
+where grade in ('A','B') and course in ('Physics','Chemistry')
