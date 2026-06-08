@@ -273,7 +273,7 @@ select
   count(*) as "total_orders_in_june"
 from orders
 where order_date between '2023-06-01' and '2023-06-30'
-
+-- .......
 
 
 
