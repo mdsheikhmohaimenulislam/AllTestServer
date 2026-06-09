@@ -256,12 +256,12 @@ select * from customers
 where email Ilike '%.com' and country in ('USA','UK');
 
 -- 9...
-select  
-  upper(concat(customer_first_name, ' ',last_name)) as "Full Name",
-  email as "Email",
-  lower(city) as "City", country
-from customers
-where country in ('USA','UK')
+-- select  
+--   upper(concat(customer_first_name, ' ',last_name)) as "Full Name",
+--   email as "Email",
+--   lower(city) as "City", country
+-- from customers
+-- where country in ('USA','UK')
 
 
 -- 10.....
