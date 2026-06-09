@@ -252,8 +252,8 @@ group by genre
 having avg(price) > 14;
 
 -- 8....
-select * from customers
-where email Ilike '%.com' and country in ('USA','UK');
+-- select * from customers
+-- where email Ilike '%.com' and country in ('USA','UK');
 
 -- 9...
 select  
