@@ -255,6 +255,7 @@ having avg(price) > 14;
 select * from customers
 where email Ilike '%.com' and country in ('USA','UK');
 
+
 -- 9...
 select  
   upper(concat(customer_first_name, ' ',last_name)) as "Full Name",
