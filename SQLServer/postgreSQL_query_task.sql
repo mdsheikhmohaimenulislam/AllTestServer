@@ -239,8 +239,8 @@ alter table customers
 rename column first_name to customer_first_name
 
 -- 5.....
--- select * from books
--- where genre = 'Fantasy';
+select * from books
+where genre = 'Fantasy';
 
 -- 6.....
 select count(*) as "Total Order" from orders;
