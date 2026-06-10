@@ -247,9 +247,9 @@ select count(*) as "Total Order" from orders;
 
 
 -- 7....
-select genre, round(avg(price),2) from books
-group by genre 
-having avg(price) > 14;
+-- select genre, round(avg(price),2) from books
+-- group by genre 
+-- having avg(price) > 14;
 
 -- 8....
 select * from customers
