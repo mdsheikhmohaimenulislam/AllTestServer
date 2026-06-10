@@ -243,7 +243,7 @@ select * from books
 where genre = 'Fantasy';
 
 -- 6.....
-select count(*) as "Total Order" from orders;
+-- select count(*) as "Total Order" from orders;
 
 
 -- 7....
