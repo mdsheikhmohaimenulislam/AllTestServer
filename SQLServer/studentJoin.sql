@@ -134,3 +134,24 @@ INSERT INTO posts (title, user_id) VALUES
 ('Batash just shared an amazing recipe!', 1),
 ('Exploring adventures with Sagor.', 4),
 ('Nodi''s wisdom always leaves me inspired.', 4);
+
+
+
+-- inner
+select * from posts as p
+inner join users as u on p.user_id = u.id
+
+--   -- Left join
+-- select * from posts as p
+-- left join users as u on  p.user_id = u.id
+
+-- -- Right join 
+-- select * from posts as p
+-- right join users as u on p.user_id = u.id
+
+-- -- full join
+-- select * from posts as p
+-- full join users as u on p.user_id = u.id
+
+-- select * from users as u
+-- right join posts as p on u.id = p.user_id
