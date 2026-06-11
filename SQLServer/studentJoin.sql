@@ -155,3 +155,31 @@ full join users as u on p.user_id = u.id
 
 -- select * from users as u
 -- right join posts as p on u.id = p.user_id
+
+
+-- Cross Join
+CREATE TABLE employees (
+emp_id INT,
+emp_name VARCHAR(50),
+dept_id INT
+);
+
+CREATE TABLE departments (
+dept_id INT,
+dept_name VARCHAR (50)
+)
+
+-- Inserting sample data
+INSERT INTO employees VALUES (1, 'John Doe', 101);
+INSERT INTO employees VALUES (2, 'Jane Smith', 102);
+
+INSERT INTO departments VALUES (101, 'Human Resources');
+insert INTO departments VALUES (102, 'Marketing!')
+
+-- Cross Join
+select * from employees 
+cross join departments
+
+-- natural join
+-- select * from employees
+-- natural join departments
