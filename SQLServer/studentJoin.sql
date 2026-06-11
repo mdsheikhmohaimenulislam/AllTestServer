@@ -181,5 +181,5 @@ select * from employees
 cross join departments
 
 -- natural join
--- select * from employees
--- natural join departments
+select * from employees
+natural join departments
