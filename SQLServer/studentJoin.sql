@@ -99,3 +99,38 @@ group by county
 -- count student by grade
 select grade ,count(*) from students
 group by grade
+
+
+-- Courses with more than 4 students
+select courses,count(*) from students
+group by courses
+having count(*) > 4;
+
+--Countries where average student age is greater than 21
+select country, avg(age) from students
+group by country
+having avg(age) > 21
+
+-- ****************************************............................
+create table users(
+  id serial primary key,
+  user_name varchar(50) not null
+)
+
+create table posts(
+  id serial primary key,
+  title text not null,
+  user_id int references users(id)
+)
+
+INSERT INTO users (user_name) VALUES
+('akash'),
+('batash'),
+('sagor'),
+('nodi');
+
+INSERT INTO posts (title, user_id) VALUES
+('Enjoying a sunny day with Akash!', 2),
+('Batash just shared an amazing recipe!', 1),
+('Exploring adventures with Sagor.', 4),
+('Nodi''s wisdom always leaves me inspired.', 4);
