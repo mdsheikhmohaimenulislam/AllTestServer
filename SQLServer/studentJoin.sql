@@ -150,8 +150,8 @@ select * from posts as p
 right join users as u on p.user_id = u.id
 
 -- -- full join
--- select * from posts as p
--- full join users as u on p.user_id = u.id
+select * from posts as p
+full join users as u on p.user_id = u.id
 
 -- select * from users as u
 -- right join posts as p on u.id = p.user_id
