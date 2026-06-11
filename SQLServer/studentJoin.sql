@@ -77,3 +77,25 @@ update students
 set name = 'sara', email = 'sara@gamilcom'
 where id = 3
 
+
+-- Deleting Data
+select * from students;
+
+select * from students
+where age > 23 and email is null;
+
+delete from students
+where age > 23 and email is null;
+
+
+-- GROUP BY Explained
+select county,avg(age) from students
+group by county
+
+-- count student by county
+select county , count(*) from students
+group by county
+
+-- count student by grade
+select grade ,count(*) from students
+group by grade
