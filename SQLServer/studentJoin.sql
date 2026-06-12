@@ -176,7 +176,7 @@ INSERT INTO employees VALUES (2, 'Jane Smith', 102);
 INSERT INTO departments VALUES (101, 'Human Resources');
 insert INTO departments VALUES (102, 'Marketing!')
 
--- Cross Join............
+-- ....Cross Join............
 select * from employees 
 cross join departments
 
