@@ -180,6 +180,6 @@ insert INTO departments VALUES (102, 'Marketing!')
 select * from employees 
 cross join departments
 
--- natural join
+-- natural join....
 select * from employees
 natural join departments
