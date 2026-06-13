@@ -234,3 +234,30 @@ values
   (13, 3, 6, '2023-06-07', NULL, 64.99),
   (14, 4, 4, '2023-06-08', 85, 54.99),
   (15, 5, 5, '2023-06-09', 60, 79.99);
+
+
+
+select
+  student_id,
+  first_name,
+  last_name,
+  email,
+  coalesce(phone, 'Not Provided') AS phone_status,
+  country,
+  enrollment_date
+from
+  students;
+
+
+-- 2...
+select * from courses
+order by price desc limit 5
+
+-- 3.............
+select * from courses
+order by course_id limit 3 offset 3 * 1
+
+-- 4.............
+update courses
+set price = price * 1.10
+where category = 'Programming'
