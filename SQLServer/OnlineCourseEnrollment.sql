@@ -294,3 +294,58 @@ select concat(s.first_name, ' ' ,s.last_name) as full_name, c.course_title, e.pa
 from students as s
 inner join enrollments as e on s.student_id = e.student_id
 inner join courses as c on e.course_id  = c.course_id
+
+
+
+-- 11......
+select * from students as s
+left join enrollments as e on s.student_id = e.student_id 
+left join courses as c on e.course_id = c.course_id
+  
+-- WHERE e.student_id IS NULL;
+
+-- 12......
+select 
+c.course_title,
+  s.student_id,
+  CONCAT(s.first_name, ' ', s.last_name) AS full_name from courses as c
+right join enrollments as e on c.course_id = e.course_id
+right join students as s on s.student_id = e.student_id
+
+
+SELECT *
+FROM courses c
+right join enrollments as e on c.course_id = e.course_id
+right join students as s on s.student_id = e.student_id
+
+-- 13....
+select 
+s.student_id,
+concat(s.first_name, ' ' , s.last_name) as full_name,
+s.email,
+s.country,
+c.course_id,
+c.course_title,
+c.instructor,
+c.price
+from students as s
+full join enrollments as e on s.student_id = e.student_id
+full join courses as c on e.course_id = c.course_id
+
+-- .................... Extract to day month year 
+select extract(day from enrollment_date) from enrollments;
+select extract(month from enrollment_date) from enrollments
+select extract(year from enrollment_date) from enrollments
+-- 14.........
+select extract(year from enrollment_date) as enrollment_year,
+count(enrollment_id) as total_enrollments 
+from enrollments
+group by enrollment_year;
+
+
+-- 15..............
+select c.course_title, round(avg(e.progress_percentage)) as average_progress
+from courses as c
+inner join enrollments as e on c.course_id = e.course_id
+group by c.course_title
+
