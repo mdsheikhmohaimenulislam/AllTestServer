@@ -261,3 +261,36 @@ order by course_id limit 3 offset 3 * 1
 update courses
 set price = price * 1.10
 where category = 'Programming'
+
+
+
+-- 5...............
+delete from enrollments
+  where progress_percentage is null;
+
+select * from enrollments
+-- 6............
+select c.category ,sum( e.paid_amount) as total_paid_amount from courses as c
+inner join enrollments as e on c.course_id = e.course_id
+group by c.category
+
+-- 7.........
+select category, round(avg(price), 2) as average_course_price from courses
+group by category
+having round(avg(price), 2) > 60
+
+-- 8...... 
+select c.course_title, count(e.enrollment_id) as students_are_enrolled from courses as c
+  inner join enrollments as e on c.course_id = e.course_id
+group by c.course_title
+
+-- 9.......
+insert into enrollments(enrollment_id, student_id, course_id, enrollment_date, progress_percentage, paid_amount)
+values
+(50, 60, 5, '2023-05-01', 90, 455.22)
+
+-- 10...........
+select concat(s.first_name, ' ' ,s.last_name) as full_name, c.course_title, e.paid_amount 
+from students as s
+inner join enrollments as e on s.student_id = e.student_id
+inner join courses as c on e.course_id  = c.course_id
