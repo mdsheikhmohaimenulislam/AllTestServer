@@ -3,7 +3,6 @@ import { prisma } from "../../lib/prisma";
 import config from "../../config";
 import { RegisterPayload } from "./user.interface";
 
-
 const registerUserIntoDB = async (payload: RegisterPayload) => {
   const { name, email, password, profilePhoto } = payload;
 
@@ -25,15 +24,20 @@ const registerUserIntoDB = async (payload: RegisterPayload) => {
       name,
       email,
       password: hashesPassword,
+      profile: {
+        create: {
+          profilePhoto,
+        },
+      },
     },
   });
 
-  await prisma.profile.create({
-    data: {
-      userId: createdUser.id,
-      profilePhoto,
-    },
-  });
+  //   await prisma.profile.create({
+  //     data: {
+  //       userId: createdUser.id,
+  //       profilePhoto,
+  //     },
+  //   });
 
   const user = await prisma.user.findUnique({
     where: {
