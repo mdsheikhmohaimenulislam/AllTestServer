@@ -5,7 +5,7 @@ import { userController } from "./user.controller";
 
 const route = Router();
 
-route.post("/register", userController.createUser);
+route.post("/register", userController.registerUser);
 
 
 export const userRouters = route
