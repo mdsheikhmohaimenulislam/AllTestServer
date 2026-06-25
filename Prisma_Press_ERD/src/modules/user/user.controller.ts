@@ -6,6 +6,7 @@ import { sendResponse } from "../../utils/sendResponse";
 import config from "../../config";
 import { jwtUtils } from "../../utils/jwt";
 import httpStatus from "http-status";
+import { Payload } from "../../../generated/prisma/internal/prismaNamespace";
 
 // const registerUser = async (req: Request, res: Response) => {
 //   try {
@@ -62,7 +63,6 @@ const getMyProfile = catchAsync(
     // const { accessToken } = req.cookies;
     // console.log(accessToken);
 
-
     // const verifiedToken = jwtUtils.verifyToken(
     //   accessToken,
     //   config.jwt_access_secret,
@@ -73,7 +73,9 @@ const getMyProfile = catchAsync(
     //   throw new Error(verifiedToken);
     // }
 
-    const profile = await userService.getMyProfileFromDB(req.user?.id as string);
+    const profile = await userService.getMyProfileFromDB(
+      req.user?.id as string,
+    );
 
     sendResponse(res, {
       success: true,
@@ -84,7 +86,28 @@ const getMyProfile = catchAsync(
   },
 );
 
+const updateMyProfile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?.id as string;
+
+    const Payload = req.body;
+
+    const updatedProfile = await userService.updateMyProfileIntoDB(
+      userId,
+      Payload,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "User Profile Updated successfully...",
+      data: { updatedProfile },
+    });
+  },
+);
+
 export const userController = {
   registerUser,
   getMyProfile,
+  updateMyProfile,
 };

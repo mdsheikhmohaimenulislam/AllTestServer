@@ -13,6 +13,10 @@ const loginUser = async (payload: ILoginUser) => {
     },
   });
 
+  if (user.activeStatus === "BLOCKED") {
+    throw new Error("Your account has been blocked . please contact support ");
+  }
+
   const isPasswordMatched = await bcrypt.compare(password, user.password);
   if (!isPasswordMatched) {
     throw new Error("Password is incorrect.");
@@ -42,7 +46,6 @@ const loginUser = async (payload: ILoginUser) => {
     refreshToken,
   };
 };
-
 
 export const authService = {
   loginUser,
