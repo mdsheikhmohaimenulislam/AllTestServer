@@ -6,8 +6,9 @@ import { postController } from "./post.controller";
 const router = Router();
 
 router.post(
-    "/", 
-    auth(Role.USER, Role.ADMIN, Role.AUTHOR), postController.createPost
+  "/",
+  auth(Role.USER, Role.ADMIN, Role.AUTHOR),
+  postController.createPost,
 );
 
 router.get("/", postController.getAllPost);
@@ -19,7 +20,17 @@ router.get(
   postController.getMyPost,
 );
 router.get("/:postId", postController.getPostById);
-router.patch("/:postId", postController.updatePost);
-router.delete("/:postId", postController.deletePost);
+
+router.patch(
+  "/:postId",
+  auth(Role.USER, Role.ADMIN, Role.AUTHOR),
+  postController.updatePost,
+);
+
+router.delete(
+  "/:postId",
+  auth(Role.USER, Role.ADMIN, Role.AUTHOR),
+  postController.deletePost,
+);
 
 export const postRouter = router;

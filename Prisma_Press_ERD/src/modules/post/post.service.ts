@@ -1,6 +1,5 @@
 import { prisma } from "../../lib/prisma";
-import { auth } from "../../middleWares/auth";
-import { ICreatePost } from "./post.interface";
+import { ICreatePost, IUpdatePostPayload } from "./post.interface";
 
 const createPostInToDB = async (payload: ICreatePost, userId: string) => {
   const result = await prisma.post.create({
@@ -57,12 +56,6 @@ const getPostById = async (postId: string) => {
   return updatedPost;
 };
 
-const updatePost = async () => {};
-
-const deletePost = async () => {};
-
-const getPostStatus = async () => {};
-
 const getMyPost = async (authorId: string) => {
   const result = await prisma.post.findMany({
     where: {
@@ -88,6 +81,68 @@ const getMyPost = async (authorId: string) => {
   });
 
   return result;
+};
+
+const getPostStatus = async () => {};
+
+const updatePost = async (
+  postId: string,
+  payload: IUpdatePostPayload,
+  authorId: string,
+  isAdmin: boolean,
+) => {
+  const post = await prisma.post.findUniqueOrThrow({
+    where: {
+      id: postId,
+    },
+  });
+
+  if (!isAdmin && post.authorId !== authorId) {
+    throw new Error("You are not the owner of the post!");
+  }
+
+  // Only admin can update isFeatured
+  if (!isAdmin && payload.isFeatured !== undefined) {
+    throw new Error("Only admin can update the featured status.");
+  }
+
+  const Result = await prisma.post.update({
+    where: {
+      id: postId,
+    },
+    data: payload,
+    include: {
+      author: {
+        omit: {
+          password: true,
+        },
+      },
+      comments: true,
+    },
+  });
+
+  return Result;
+};
+
+const deletePost = async (
+  postId: string,
+  authorId: string,
+  isAdmin: boolean,
+) => {
+  const post = await prisma.post.findUniqueOrThrow({
+    where: {
+      id: postId,
+    },
+  });
+
+  if (!isAdmin && post.authorId !== authorId) {
+    throw new Error("You are not the owner of the post!");
+  }
+  await prisma.post.delete({
+    where: {
+      id: postId,
+    },
+  });
 };
 
 export const postService = {
