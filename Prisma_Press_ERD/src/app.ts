@@ -4,6 +4,8 @@ import config from "./config";
 import cors from "cors";
 import { userRouters } from "./modules/user/user.route";
 import { authRoutes } from "./modules/auth/auth.route";
+import { postRouter } from "./modules/post/post.route";
+import { commentRouter } from "./modules/comment/comment.route";
 
 
 
@@ -27,5 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/users", userRouters);
 app.use("/api/auth", authRoutes)
+app.use("/api/posts", postRouter)
+app.use("/api/comments", commentRouter)
 
 export default app;
