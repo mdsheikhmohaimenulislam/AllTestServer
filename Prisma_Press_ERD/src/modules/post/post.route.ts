@@ -5,12 +5,12 @@ import { postController } from "./post.controller";
 
 const router = Router();
 
-router.get(
-  "/",
-  auth(Role.ADMIN, Role.AUTHOR, Role.USER),
-  postController.createPost,
+router.post(
+    "/", 
+    auth(Role.USER, Role.ADMIN, Role.AUTHOR), postController.createPost
 );
-router.post("/", postController.getAllPost);
+
+router.get("/", postController.getAllPost);
 
 router.get("/stats", auth(Role.ADMIN), postController.getPostStatus);
 router.get(
