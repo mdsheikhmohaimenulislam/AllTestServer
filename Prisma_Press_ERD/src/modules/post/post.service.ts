@@ -29,32 +29,51 @@ const getAllPost = async () => {
 };
 
 const getPostById = async (postId: string) => {
-  const post = await prisma.post.findUniqueOrThrow({
-    where: {
-      id: postId,
-    },
-  });
-
-  const updatedPost = await prisma.post.update({
-    where: {
-      id: postId,
-    },
-    data: {
-      views: {
-        increment: 1,
+  const transactionResult = await prisma.$transaction(async (tx) => {
+    await tx.post.update({
+      where: {
+        id: postId,
       },
-    },
-    include: {
-      author: {
-        omit: {
-          password: true,
+      data: {
+        views: {
+          increment: 1,
         },
       },
-      comments: true,
-    },
+    });
+    // throw new Error("fake error")
+    const post = await tx.post.findUniqueOrThrow({
+      where: {
+        id: postId,
+      },
+
+      include: {
+        author: {
+          omit: {
+            password: true,
+          },
+        },
+
+        comments: {
+          where: {
+            status: CommentStatus.APPROVED,
+          },
+
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+      },
+    });
+    return post;
   });
 
-  return updatedPost;
+  return transactionResult;
 };
 
 const getMyPost = async (authorId: string) => {
@@ -92,8 +111,6 @@ const updatePost = async (
   authorId: string,
   isAdmin: boolean,
 ) => {
-
-
   // if (!isAdmin && past.authorId !== authorId) {
   //   throw new Error("You are not the owner of the post!");
   // }
@@ -108,39 +125,34 @@ const updatePost = async (
       id: postId,
     },
     data: payload,
-   
   });
 
-
   const post = await prisma.post.findUniqueOrThrow({
-    where:{
-      id:postId
+    where: {
+      id: postId,
     },
-    include:{
-      author:{
-        omit:{
-          password:true
-        }
-      },
-      comments:{
-        where:{
-          status:CommentStatus.APPROVED
+    include: {
+      author: {
+        omit: {
+          password: true,
         },
-        orderBy:{
-            createdAt:"desc"
+      },
+      comments: {
+        where: {
+          status: CommentStatus.APPROVED,
         },
-        
+        orderBy: {
+          createdAt: "desc",
+        },
       },
 
-      _count:{
-        select:{
-          comments:true
-        }
-      }
-    }
-  })
-
-
+      _count: {
+        select: {
+          comments: true,
+        },
+      },
+    },
+  });
 
   return post;
 };
