@@ -34,7 +34,16 @@ const getAllPost = catchAsync(
 );
 
 const getPostStatus = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await postService.getPostStatus();
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "post status retrieved successfully...",
+      data: result,
+    });
+  },
 );
 
 const getMyPost = catchAsync(
