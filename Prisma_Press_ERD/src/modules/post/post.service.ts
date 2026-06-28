@@ -1,3 +1,4 @@
+import { CommentStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { ICreatePost, IUpdatePostPayload } from "./post.interface";
 
@@ -91,37 +92,57 @@ const updatePost = async (
   authorId: string,
   isAdmin: boolean,
 ) => {
-  const post = await prisma.post.findUniqueOrThrow({
-    where: {
-      id: postId,
-    },
-  });
 
-  if (!isAdmin && post.authorId !== authorId) {
-    throw new Error("You are not the owner of the post!");
-  }
+
+  // if (!isAdmin && past.authorId !== authorId) {
+  //   throw new Error("You are not the owner of the post!");
+  // }
 
   // Only admin can update isFeatured
   if (!isAdmin && payload.isFeatured !== undefined) {
     throw new Error("Only admin can update the featured status.");
   }
 
-  const Result = await prisma.post.update({
+  await prisma.post.update({
     where: {
       id: postId,
     },
     data: payload,
-    include: {
-      author: {
-        omit: {
-          password: true,
-        },
-      },
-      comments: true,
-    },
+   
   });
 
-  return Result;
+
+  const post = await prisma.post.findUniqueOrThrow({
+    where:{
+      id:postId
+    },
+    include:{
+      author:{
+        omit:{
+          password:true
+        }
+      },
+      comments:{
+        where:{
+          status:CommentStatus.APPROVED
+        },
+        orderBy:{
+            createdAt:"desc"
+        },
+        
+      },
+
+      _count:{
+        select:{
+          comments:true
+        }
+      }
+    }
+  })
+
+
+
+  return post;
 };
 
 const deletePost = async (
