@@ -126,5 +126,5 @@ export const commentService = {
   updateComment,
   deleteComment,
   moderateComment,
-  // getCommentByPostId,
+  // getCommentByPostId,  
 };
