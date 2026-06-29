@@ -3,6 +3,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import { commentService } from "./comment.service";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status";
+import { Payload } from "../../../generated/prisma/internal/prismaNamespace";
 
 const createComment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -20,19 +21,86 @@ const createComment = catchAsync(
 );
 
 const getCommentByAuthorId = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { authorId } = req.params;
+
+    const result = await commentService.getCommentByAuthorId(
+      authorId as string,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Comments retrieved successfully",
+      data: result,
+    });
+  },
 );
 
 const getCommentByCommentId = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { commentId } = req.params;
+
+    const result = await commentService.getCommentByCommentId(
+      commentId as string,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Comment retrieved successfully",
+      data: result,
+    });
+  },
 );
 
+// const getCommentByPostId = catchAsync(async (req : Request, res : Response, next : NextFunction) => {
+//     const { postId } = req.params
+//     const result = await commentService.getCommentByPostId(postId as string)
+//     sendResponse(res, {
+//         success: true,
+//         statusCode: httpStatus.OK,
+//         message: "Comment retrieved successfully",
+//         data: result
+//     })
+// })
+
 const updateComment = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user;
+    const authorId = user?.id as string;
+
+    const { commentId } = req.params;
+    const payload = req.body;
+
+    const result = await commentService.updateComment(
+      commentId as string,
+      payload,
+      authorId,
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Comment updated successfully",
+      data: result,
+    });
+  },
 );
 
 const deleteComment = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user;
+    const { commentId } = req.params;
+    const authorId = user?.id as string;
+
+    const result = await commentService.deleteComment(commentId as string, authorId as string)
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Comment deleted successfully",
+        data: result
+    })
+  },
 );
 
 const moderateComment = catchAsync(
@@ -46,4 +114,5 @@ export const commentController = {
   updateComment,
   deleteComment,
   moderateComment,
+  // getCommentByPostId,
 };

@@ -13,7 +13,7 @@ model Post {
   authorId String
   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
-  comments comment[]
+  comments Comment[]
 
   @@index([authorId])
   @@map("posts")
