@@ -1,5 +1,10 @@
 import { prisma } from "../../lib/prisma";
-import { ICreateComment, IUpdateCommentPayload } from "./comment.interface";
+import {
+  ICreateComment,
+  IModerateCommentPayload,
+  IUpdateCommentPayload,
+} from "./comment.interface";
+import { Payload } from "../../../generated/prisma/internal/prismaNamespace";
 
 const createComment = async (authorId: string, payload: ICreateComment) => {
   await prisma.post.findUniqueOrThrow({
@@ -84,8 +89,6 @@ const updateComment = async (
     },
   });
 
-
-
   const comment = await prisma.comment.update({
     where: {
       id: commentId,
@@ -117,7 +120,35 @@ const deleteComment = async (commentId: string, authorId: string) => {
   return null;
 };
 
-const moderateComment = async () => {};
+const moderateComment = async (
+  commentId: string,
+  data: IModerateCommentPayload,
+) => {
+  const commentData = await prisma.comment.findUniqueOrThrow({
+    where: {
+      id: commentId,
+    },
+    select: {
+      id: true,
+      status: true,
+    },
+  });
+
+  if (commentData.status === data.status) {
+    throw new Error(
+      `Your provided status (${data.status}) is already up to date.`,
+    );
+  }
+
+  const comment = await prisma.comment.update({
+    where: {
+      id: commentId,
+    },
+    data,
+  });
+
+  return comment;
+};
 
 export const commentService = {
   createComment,
@@ -126,5 +157,5 @@ export const commentService = {
   updateComment,
   deleteComment,
   moderateComment,
-  // getCommentByPostId,  
+  // getCommentByPostId,
 };
