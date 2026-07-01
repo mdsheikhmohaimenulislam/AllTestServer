@@ -6,8 +6,8 @@ import { userRouters } from "./modules/user/user.route";
 import { authRoutes } from "./modules/auth/auth.route";
 import { postRouter } from "./modules/post/post.route";
 import { commentRouter } from "./modules/comment/comment.route";
-
-
+import { notFound } from "./middleWares/notFound";
+import { globalErrorHandling } from "./middleWares/globalErrorHandler";
 
 const app: Application = express();
 
@@ -26,10 +26,16 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-
 app.use("/api/users", userRouters);
-app.use("/api/auth", authRoutes)
-app.use("/api/posts", postRouter)
-app.use("/api/comments", commentRouter)
+app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRouter);
+app.use("/api/comments", commentRouter);
+
+app.use(notFound);
+
+app.use(globalErrorHandling) ;
+
+
+
 
 export default app;
