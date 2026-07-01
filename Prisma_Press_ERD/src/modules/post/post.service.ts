@@ -1,7 +1,7 @@
-import { Prisma } from "../../../generated/prisma/browser";
 import { CommentStatus, PostStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
-import { ICreatePost, IUpdatePostPayload } from "./post.interface";
+import { ICreatePost, IPostQuery, IUpdatePostPayload } from "./post.interface";
+
 
 const createPostInToDB = async (payload: ICreatePost, userId: string) => {
   const result = await prisma.post.create({
@@ -14,37 +14,58 @@ const createPostInToDB = async (payload: ICreatePost, userId: string) => {
   return result;
 };
 
-const getAllPost = async () => {
+const getAllPost = async (query: IPostQuery) => {
+  const limit = query.limit ? Number(query.limit) : 10;
+  const page = query.page ? Number(query.page) : 1;
+  const skip = (page - 1) * limit;
+
+  const sortBy = query.sortBy ? query.sortBy : "createdAt";
+  const sortOrder = query.sortOrder ? query.sortOrder : "desc";
+
+
+
   const posts = await prisma.post.findMany({
-where: {
-  // Filtering & Searching Combined
-  AND: [
-    {
-      // Searching
-      OR: [
-        {
-          title: {
-            contains: "Ron",
-            mode: "insensitive",
-          },
-        },
-        {
-          content: {
-            contains: "Ron",
-            mode: "insensitive",
-          },
-        },
+    // Filtering & Searching Combined
+
+    where: {
+      AND: [
+        // Search term....
+        query.searchTerm
+          ? {
+              OR: [
+                {
+                  title: {
+                    contains: query.searchTerm,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  content: {
+                    contains: query.searchTerm,
+                    mode: "insensitive",
+                  },
+                },
+              ],
+            }
+          : {},
+
+        // title filtering..
+
+        query.title ? { title: query.title } : {},
+
+        // content filtering..
+        query.content ? { content: query.content } : {},
       ],
     },
-    // Filtering
-    {
-      title: "Ronaldo NazArio",
+
+    take: limit,
+    skip: skip,
+
+    orderBy: {
+      // sortby: sortByOrder
+      [sortBy]: sortOrder,
     },
-    {
-      content: "Ronaldo",
-    },
-  ],
-},
+
     include: {
       author: {
         omit: {
