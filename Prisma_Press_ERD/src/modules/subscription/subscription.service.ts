@@ -45,9 +45,12 @@ const createCheckoutSession = async (userId: string) => {
     return session.url;
   });
 
+
   return {
     paymentUrl: transactionResult,
   };
+
+  
 };
 
 export const subscriptionService = {
