@@ -10,10 +10,11 @@ model Subscription {
   // Strip related ids
 
   // Strip customer id
+  stripCustomerId String @unique
   // Strip Subscription id
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("subscription")
+  @@map("subscriptions")
 }

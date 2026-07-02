@@ -6,7 +6,7 @@ import { auth } from "../../middleWares/auth";
 const router = Router();
 
 router.post(
-  "/checkOut",
+  "/checkout",
   auth(Role.ADMIN, Role.AUTHOR, Role.USER),
   subscriptionController.createCheckoutSession,
 );
